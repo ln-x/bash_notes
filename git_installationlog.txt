@@ -1,0 +1,9 @@
+git config --global user.email "heidelinde.trimmel@boku.ac.at"
+git config --global user.name "wasserblum"
+cd /home/lnx/MODELS/github
+git init
+git remote -v
+git remote add origin https://github.com/wasserblum/bash_installationnotes
+
+#Alternative:
+#git clone https://github.com/wasserblum/bash_installationnotes

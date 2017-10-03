@@ -1,0 +1,179 @@
+#Try to run SURFEX using a version compiled on Fedora (by atrawog) on Ubuntu16.04
+
+cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/
+unset XYZ;unset SRC_SURFEX;./configure
+ . ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-FORC-NOMPI-OMP-O2-X0
+
+ make user
+ make installmaster
+ make installuser
+
+ cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/MY_RUN/FORCING
+ ./prepare_forcing.bash hapex
+
+ **
+ ERROR line 53: /bin/vi  no such file or directory
+ whereis vi
+ usr/bin/vi
+ ln -s /Zieldatei /Referenz
+ ln -s /usr/bin/vi /bin/vi
+ SOLVED
+ **
+
+ :wq!
+ cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/MY_RUN/KTEST/hapex
+ export OMP_NUM_THREADS=1
+ ./pgd.exe ./prep.exe ./offline.exe
+
+ **
+ ERROR ./pgd.exe     no such file or directory
+
+ find . -maxdepth 1 -type l -ls #find all symlinks in this directory -> all *.exe sind verlinkt nach /exe/ 10312720      4 lrwxrwxrwx   1 root     root           91 Sep 23 15:22 ./offline.exe -> /home/lnx/MODELS/SURFEX_TRUNK4816_2/exe/OFFline-LXgfortran-SFX-V8-1-1-NOOMPI-OMP-O2-X0-FORC
+  10312715      4 lrwxrwxrwx   1 root     root           73 Sep 23 15:26 ./ecoclimapI_covers_param.bin -> /home/lnx/MODELS/SURFEX_TRUNK4816_2/ECOCLIMAP/ecoclimapI_covers_param.bin
+  10312716      4 lrwxrwxrwx   1 root     root           77 Sep 23 15:26 ./ecoclimapII_eu_covers_param.bin -> /home/lnx/MODELS/SURFEX_TRUNK4816_2/ECOCLIMAP/ecoclimapII_eu_covers_param.bin
+  10312718      4 lrwxrwxrwx   1 root     root           88 Sep 23 15:24 ./prep.exe -> /home/lnx/MODELS/SURFEX_TRUNK4816_2/exe/PREP-LXgfortran-SFX-V8-1-1-NOOMPI-OMP-O2-X0-FORC
+  10310480      4 lrwxrwxrwx   1 root     root           86 Sep 23 15:34 ./pgd.exe -> /home/lnx/MODELS/SURFEX_TRUNK4816_2/exe/PGD-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC
+
+ cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/exe
+ ls -l 				#see user rights of the *.exe files - find sybolic links ...total 32
+ -rw-rw-r-- 1 lnx lnx 785 Sep 21 18:06 LISTING_PGD.txt
+ lrwxrwxrwx 1 lnx lnx 116 Sep 23 14:08 OFFLINE-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0 -> /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/OFFLINE
+ lrwxrwxrwx 1 lnx lnx 114 Sep 23 14:09 OFFLINE-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC -> /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC/OFFLINE
+ lrwxrwxrwx 1 lnx lnx 112 Sep 23 14:08 PGD-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0 -> /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/PGD
+ lrwxrwxrwx 1 lnx lnx 110 Sep 23 14:09 PGD-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC -> /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC/PGD
+ lrwxrwxrwx 1 lnx lnx 127 Sep 23 14:09 PRE_INPUT_EXPERIMENT-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC -> /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC/PRE_INPUT_EXPERIMENT
+ lrwxrwxrwx 1 lnx lnx 113 Sep 23 14:08 PREP-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0 -> /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/PREP
+ lrwxrwxrwx 1 lnx lnx 111 Sep 23 14:09 PREP-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC -> /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC/PREP
+
+ cd ../src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC
+ ls -l
+ -rw-rw-r-- 1 lnx lnx     1898 Sep 21 18:55 offline.D
+ -rw-rw-r-- 1 lnx lnx      505 Sep 21 18:55 open_close_bin_asc_forc.D
+ -rwxrwxr-x 1 lnx lnx 23418112 Sep 21 18:55 PGD
+ -rwxrwxr-x 1 lnx lnx   832016 Sep 21 18:55 PRE_INPUT_EXPERIMENT
+ -rw-rw-r-- 1 lnx lnx      543 Sep 21 18:55 pre_input_experiment.D
+ -rwxrwxr-x 1 lnx lnx 32369552 Sep 21 18:55 PREP
+
+ cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/MY_RUN/KTEST/hapex
+ rm ./offline.exe ./pgd.exe ./prep.exe
+ rm ./ecoclimapI_covers_param.bin
+ rm ./ecoclimapII_eu_covers_param.bin
+
+ sudo ln -s /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/exe/PGD-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC ./pgd.exe
+ sudo ln -s /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/exe/PREP-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC ./prep.exe
+ sudo ln -s /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/exe/OFFLINE-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC ./offline.exe
+SOLVED
+**
+
+**
+ERROR
+
+./pgd.exe ./prep.exe ./offline.exe
+
+./pgd.exe: error while loading shared libraries: libgrib_api_f90.so.1: cannot open shared object file: No such file or directory
+
+cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/grib_api-1.17.0-Source-LXgfortran/lib
+ls -l
+
+total 20352
+-rw-r--r-- 1 lnx lnx 13238758 Sep 21 18:37 libgrib_api.a
+-rw-r--r-- 1 lnx lnx   418738 Sep 21 18:37 libgrib_api_f77.a
+-rwxr-xr-x 1 lnx lnx     1020 Sep 21 18:37 libgrib_api_f77.la
+lrwxrwxrwx 1 lnx lnx       24 Sep 21 18:37 libgrib_api_f77.so -> libgrib_api_f77.so.1.0.0
+lrwxrwxrwx 1 lnx lnx       24 Sep 21 18:37 libgrib_api_f77.so.1 -> libgrib_api_f77.so.1.0.0
+-rwxr-xr-x 1 lnx lnx   308272 Sep 21 18:37 libgrib_api_f77.so.1.0.0
+-rw-r--r-- 1 lnx lnx   425722 Sep 21 18:37 libgrib_api_f90.a
+-rwxr-xr-x 1 lnx lnx     1020 Sep 21 18:37 libgrib_api_f90.la
+lrwxrwxrwx 1 lnx lnx       24 Sep 21 18:37 libgrib_api_f90.so -> libgrib_api_f90.so.1.0.0
+lrwxrwxrwx 1 lnx lnx       24 Sep 21 18:37 libgrib_api_f90.so.1 -> libgrib_api_f90.so.1.0.0
+-rwxr-xr-x 1 lnx lnx   319808 Sep 21 18:37 libgrib_api_f90.so.1.0.0
+-rwxr-xr-x 1 lnx lnx      992 Sep 21 18:37 libgrib_api.la
+lrwxrwxrwx 1 lnx lnx       20 Sep 21 18:37 libgrib_api.so -> libgrib_api.so.1.0.0
+lrwxrwxrwx 1 lnx lnx       20 Sep 21 18:37 libgrib_api.so.1 -> libgrib_api.so.1.0.0
+-rwxr-xr-x 1 lnx lnx  6098664 Sep 21 18:37 libgrib_api.so.1.0.0
+drwxrwxr-x 2 lnx lnx     4096 Sep 21 18:37 pkgconfig
+
+ldconfig -nNv ./
+.:
+/sbin/ldconfig.real: File ./libgrib_api.so.1 is empty, not checked.
+/sbin/ldconfig.real: File ./libgrib_api_f77.so is empty, not checked.
+/sbin/ldconfig.real: File ./libgrib_api_f90.so.1.0.0 is empty, not checked.
+/sbin/ldconfig.real: File ./libgrib_api_f90.so.1 is empty, not checked.
+/sbin/ldconfig.real: File ./libgrib_api_f77.so.1 is empty, not checked.
+/sbin/ldconfig.real: File ./libgrib_api.so is empty, not checked.
+/sbin/ldconfig.real: File ./libgrib_api.so.1.0.0 is empty, not checked.
+/sbin/ldconfig.real: File ./libgrib_api_f77.so.1.0.0 is empty, not checked.
+/sbin/ldconfig.real: File ./libgrib_api_f90.so is empty, not checked.
+
+#TO WHICH PACKAGE DO THE FILES BELONG? dpkg -S libgrib_api
+dpkg-query -S ./libgrib_api*
+
+dpkg-query: no path found matching pattern *./libgrib_api.a*
+dpkg-query: no path found matching pattern *./libgrib_api_f77.a*
+dpkg-query: no path found matching pattern *./libgrib_api_f77.la*
+dpkg-query: no path found matching pattern *./libgrib_api_f77.so*
+dpkg-query: no path found matching pattern *./libgrib_api_f77.so.1*
+dpkg-query: no path found matching pattern *./libgrib_api_f77.so.1.0.0*
+dpkg-query: no path found matching pattern *./libgrib_api_f90.a*
+dpkg-query: no path found matching pattern *./libgrib_api_f90.la*
+dpkg-query: no path found matching pattern *./libgrib_api_f90.so*
+dpkg-query: no path found matching pattern *./libgrib_api_f90.so.1*
+dpkg-query: no path found matching pattern *./libgrib_api_f90.so.1.0.0*
+dpkg-query: no path found matching pattern *./libgrib_api.la*
+dpkg-query: no path found matching pattern *./libgrib_api.so*
+dpkg-query: no path found matching pattern *./libgrib_api.so.1*
+dpkg-query: no path found matching pattern *./libgrib_api.so.1.0.0*
+
+#dpkg -S "$(readlink -f /bin/nc)"   #find filelocation including linked files
+dpkg -S "$(readlink -f ./libgrib_api_F77.so)"
+dpkg-query: no path found matching pattern /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/grib_api-1.17.0-Source-LXgfortran/lib/libgrib_api_F77.so
+dpkg -S "$(readlink -f ./libgrib_api_F77.a)"
+dpkg -S "$(readlink -f ./libgrib_api_F77.so)"
+dpkg-query: no path found matching pattern /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/grib_api-1.17.0-Source-LXgfortran/lib/libgrib_api_F77.so
+
+dlocate -S libgrip_api_f77.so.1.0.0   #find filelocation
+
+
+echo  $LD_LIBRARY_PATH
+
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/netcdf-fortran-4.4.4-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/netcdf-4.4.1-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/hdf5-1.8.17-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/szip-2.1-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/zlib-1.2.8-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/curl-7.50.1-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/netcdf4/netcdf-fortran-4.4.4-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/netcdf4/netcdf-4.4.1-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/netcdf4/hdf5-1.8.17-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/netcdf4/szip-2.1-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/netcdf4/zlib-1.2.8-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/netcdf4/curl-7.50.1-LXgfortran-NOMPI/lib:
+
+
+
+ldd ./pgd.exe #check if the linker can locate all the required libraries
+        linux-vdso.so.1 =>  (0x00007fff383fb000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f0aa1c52000)
+        librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f0aa1a4a000)
+        libgrib_api_f90.so.1 => not found
+        libgrib_api.so.1 => not found
+        libnetcdff.so.6 => not found
+        libnetcdf.so.11 => /usr/lib/x86_64-linux-gnu/libnetcdf.so.11 (0x00007f0a9e6e6000)
+        libhdf5_hl.so.10 => not found
+        libhdf5.so.10 => not found
+        ...
+
+#export LD_LIBRARY_PATH="~/myprogdir/lib/:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/src/LIB/grib_api-1.17.0-Source-LXgfortran/lib/:$LD_LIBRARY_PATH"
+
+
+
+***
+lnx@lnx-ThinkPad-X230:~/surfex/trunk/MY_RUN/FORCING$ ./prepare_forcing.bash hapex
+../../exe/PRE_INPUT_EXPERIMENT-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC: /lib/x86_64-linux-gnu/libssl.so.10: version `libssl.so.10' not found (required by /home/lnx/surfex/trunk/src/LIB/netcdf4/curl-7.50.1-LXgfortran-NOMPI/lib/libcurl.so.4)
+../../exe/PRE_INPUT_EXPERIMENT-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-FORC: /lib/x86_64-linux-gnu/libcrypto.so.10: version `libcrypto.so.10' not found (required by /home/lnx/surfex/trunk/src/LIB/netcdf4/curl-7.50.1-LXgfortran-NOMPI/lib/libcurl.so.4)
+ls: cannot access '/home/lnx/surfex/trunk/MY_RUN/FORCING/*.nc': No such file or directory
+mv: cannot stat '/home/lnx/surfex/trunk/MY_RUN/FORCING/*FORCING.nc': No such file or directory
+mv: cannot stat '/home/lnx/surfex/trunk/MY_RUN/FORCING/*PARAMS.nc': No such file or directory
+mv: cannot stat '/home/lnx/surfex/trunk/MY_RUN/FORCING/*Forc_*.nc': No such file or directory
+==============================================================================

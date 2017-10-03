@@ -1,0 +1,199 @@
+#lokal Installation (lnx)
+#nona Installation (http://www.boku.ac.at/zid/themen/everybodys-needs/services-fuer-spezialgruppen/numerisches-rechnen-vsc-nona/)
+
+apt list --installed netcdf, fortran, mpi, ...
+# automake installed
+
+apt-get install built-essentials, ubuntu-dev-tools
+apt-get install gforth, openmpi
+apt-get install libcxxtools9v5, libssl-dev, libssl1.0.0
+
+#nicht gefunden: netcdf-fortran, netcdf-fortran-mpich-devel, netcdf-fortran-openmpi-devel, netcdf-openmpi-devel, netcdf-mpich, netcdf-openmpi, netcdf-openmpi-devel
+#libgfortran, compat-libgfortran-41, gcc-gfortran
+#mpich-devel, openmpi-devel
+#perl-SelfLoader
+
+cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/
+make clean;unset XYZ;unset SRC_SURFEX;export VER_MPI="NOMPI";export VER_USER=FORC;./configure
+ . ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-FORC-NOMPI-OMP-O2-X0  #??FORC oder nicht?? -> immer gleicher Fehler
+
+make
+
+**
+ERROR1
+find: ‘/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC’: No such file or directory
+make[1]: Entering directory '/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src'
+find: ‘/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC’: No such file or directory
+make[1]: '/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/filedepallmaster' is up to date.
+make[1]: Leaving directory '/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src'
+make[1]: Entering directory '/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src'
+find: ‘/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC’: No such file or directory
+make[1]: Nothing to be done for 'objmaster'.
+make[1]: Leaving directory '/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src'
+make[1]: Entering directory '/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src'
+find: ‘/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC’: No such file or directory
+cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER ; find -L . -name '*.o'| xargs ar r /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/lib-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-MASTER.a
+ar: creating /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/lib-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-MASTER.a
+gfortran -fopenmp -Wl,-warn-once -ldl -lrt -o /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/PGD /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/spll_pgd.o /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/lib-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-MASTER.a  -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/grib_api-1.17.0-Source-LXgfortran/lib -lgrib_api_f90 -lgrib_api -Wl,-rpath,/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/grib_api-1.17.0-Source-LXgfortran/lib -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/netcdf-fortran-4.4.4-LXgfortran-NOMPI/lib -lnetcdff -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/netcdf-4.4.1-LXgfortran-NOMPI/lib -lnetcdf -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/hdf5-1.8.17-LXgfortran-NOMPI/lib -lhdf5_hl -lhdf5 -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/szip-2.1-LXgfortran-NOMPI/lib -lsz -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/zlib-1.2.8-LXgfortran-NOMPI/lib -lz -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/LIB/netcdf4/curl-7.50.1-LXgfortran-NOMPI/lib -lcurl
+/usr/bin/ld: /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/lib-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-MASTER.a(env.o): undefined reference to symbol 'dlsym@@GLIBC_2.2.5'
+/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/libdl.so: error adding symbols: DSO missing from command line
+collect2: error: ld returned 1 exit status
+Makefile:610: recipe for target  'PGD' failed
+make[1]: *** [PGD] Error 1
+***
+start again - new terminal (all enviromental variables unset) from make clean...
+make (13:03 - 13:15) -> same error as above
+***
+ERROR2
+NOMPI/include -I/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/netcdf-4.4.1-LXgfortran-NOMPI/include -I/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/hdf5-1.8.17-LXgfortran-NOMPI/include -I/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/szip-2.1-LXgfortran-NOMPI/include -I/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/zlib-1.2.8-LXgfortran-NOMPI/include -I/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/curl-7.50.1-LXgfortran-NOMPI/include -c -fopenmp -fdefault-real-8 -fdefault-double-8 -g -fno-second-underscore -fpic  -ffpe-trap=overflow,zero,invalid -fbacktrace -fconvert=swap -ldl -O2 /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/spll_zsfilter.f90 -o /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/spll_zsfilter.o
+make[1]: Leaving directory '/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src'
+make[1]: Entering directory '/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src'
+find: ‘/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/FORC’: No such file or directory
+cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER ; find -L . -name '*.o'| xargs ar r /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/lib-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-MASTER.a
+ar: creating /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/lib-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-MASTER.a
+gfortran -fopenmp -Wl,-warn-once -ldl -lrt -o /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/PGD /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/spll_pgd.o /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/lib-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-MASTER.a  -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/grib_api-1.17.0-Source-LXgfortran/lib -lgrib_api_f90 -lgrib_api -Wl,-rpath,/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/grib_api-1.17.0-Source-LXgfortran/lib -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/netcdf-fortran-4.4.4-LXgfortran-NOMPI/lib -lnetcdff -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/netcdf-4.4.1-LXgfortran-NOMPI/lib -lnetcdf -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/hdf5-1.8.17-LXgfortran-NOMPI/lib -lhdf5_hl -lhdf5 -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/szip-2.1-LXgfortran-NOMPI/lib -lsz -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/zlib-1.2.8-LXgfortran-NOMPI/lib -lz -L/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/curl-7.50.1-LXgfortran-NOMPI/lib -lcurl
+/usr/bin/ld: /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/lib-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0-MASTER.a(env.o): undefined reference to symbol 'dlsym@@GLIBC_2.2.5'
+/usr/lib/gcc/x86_64-linux-gnu/5/../../../x86_64-linux-gnu/libdl.so: error adding symbols: DSO missing from command line
+collect2: error: ld returned 1 exit status
+Makefile:610: recipe for target 'PGD' failed
+make[1]: *** [PGD] Error 1
+***
+#FINDING LOCATION OF LIBRARIES
+apt list --installed libc; libcc
+libc-bin/xenial-updates, xenial-security,now 2.23-0ubuntu9 amd64 [installed]
+libc-dev-bin/xenial-updates, xenial-security,now 2.23-0ubuntu9 amd64 [installed]
+libc6/xenial-updates, xenial-security,now 2.23-0ubuntu9 amd64 [installed]
+libc6-dbg/xenial-updates, xenial-security,now 2.23-0ubuntu9 amd64 [installed]
+libc6-dev/xenial-updates, xenial-security,now 2.23-0ubuntu9 amd64 [installed]
+libcc1-0/xenial-updates,xenial-security,now 5.4.0-6ubuntu1~16.04.4 amd64 [installed]
+libccolamd2.9.1/xenial,now 1:4.4.6-1 amd64 [installed,automatic]
+
+whereis libc-bin; locate libc6
+/usr/share/libc-bin
+/usr/share/doc/libc6
+
+locate libcc1-0; locate libccolamd2.9.1
+/usr/share/doc/libcc1-0
+/usr/share/doc/libccolamd2.9.1
+
+ldconfig -p | grep libc-bin
+
+dpkg -L libc-bin
+/.
+/sbin
+/sbin/ldconfig
+/sbin/ldconfig.real
+/etc
+/etc/ld.so.conf
+/etc/default
+/etc/default/nss
+/etc/ld.so.conf.d
+/etc/ld.so.conf.d/libc.conf
+/etc/bindresvport.blacklist
+/etc/gai.conf
+/usr
+/usr/bin
+/usr/bin/catchsegv
+/usr/bin/localedef
+/usr/bin/zdump
+/usr/bin/getconf
+/usr/bin/locale
+/usr/bin/tzselect
+/usr/bin/pldd
+/usr/bin/iconv
+/usr/bin/ldd
+/usr/bin/getent
+/usr/sbin
+/usr/sbin/iconvconfig
+/usr/sbin/zic
+/usr/lib
+/usr/lib/locale
+/usr/lib/locale/C.UTF-8
+/usr/lib/locale/C.UTF-8/LC_TIME
+/usr/lib/locale/C.UTF-8/LC_NUMERIC
+/usr/lib/locale/C.UTF-8/LC_CTYPE
+/usr/lib/locale/C.UTF-8/LC_MONETARY
+/usr/lib/locale/C.UTF-8/LC_IDENTIFICATION
+/usr/lib/locale/C.UTF-8/LC_ADDRESS
+/usr/lib/locale/C.UTF-8/LC_COLLATE
+/usr/lib/locale/C.UTF-8/LC_TELEPHONE
+/usr/lib/locale/C.UTF-8/LC_NAME
+/usr/lib/locale/C.UTF-8/LC_PAPER
+/usr/lib/locale/C.UTF-8/LC_MEASUREMENT
+/usr/lib/locale/C.UTF-8/LC_MESSAGES
+/usr/lib/locale/C.UTF-8/LC_MESSAGES/SYS_LC_MESSAGES
+/usr/share
+/usr/share/libc-bin
+/usr/share/libc-bin/nsswitch.conf
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libc-bin
+/usr/share/doc
+/usr/share/doc/libc-bin
+/usr/share/doc/libc-bin/copyright
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/tzselect.1.gz
+/usr/share/man/man1/getconf.1.gz
+/usr/share/man/man1/catchsegv.1.gz
+/usr/share/doc/libc-bin/changelog.Debian.gz
+
+
+LIBS += -ldl -fPIC
+
+#STEPHANIE suggestions:
+#1) add -ldl at the end of the line OPT_BASE, in Rules.LXgfortran.mk and redo "make"
+#2) It concerns a file env.c that is in the xrd44 library
+
+#info: The XRD39 library from the GMAP is replaced by the XRD44. The DRHOOK library is included in the XRD44 library.
+#info: link with -ldl is already done.
+#info: the DL library seems to be in the libcc library
+
+#3) Find location of libcc library (see above))
+#4) Is libcc libray path included in LD_LIBRARY_PATH? -> no
+
+lnx@lnx-ThinkPad-X230:~/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src$
+echo $LD_LIBRARY_PATH
+/trunk/src/LIB/netcdf4/netcdf-fortran-4.4.4-LXgfortran-NOMPI/lib:
+/trunk/src/LIB/netcdf4/netcdf-4.4.1-LXgfortran-NOMPI/lib:
+/trunk/src/LIB/netcdf4/hdf5-1.8.17-LXgfortran-NOMPI/lib
+/trunk/src/LIB/netcdf4/szip-2.1-LXgfortran-NOMPI/lib:
+/trunk/src/LIB/netcdf4/zlib-1.2.8-LXgfortran-NOMPI/lib
+/trunk/src/LIB/netcdf4/curl-7.50.1-LXgfortran-NOMPI/lib:
+
+#5)Include Path to dl library in your LD_LIBRARY_PATH:
+#in Rules.LXgfortran.mk
+OPT_BASE  = -fdefault-real-8 -fdefault-double-8 -g -fno-second-underscore -fpic  -ffpe-trap=overflow,zero,invalid -fbacktrace -fconvert=swap -ldl
+LDFLAGS   =  $(FCFLAGS_OMP) -Wl,-warn-once -ldl -lrt -L /usr/share/libcc1-0
+
+#libdl.so LINKS TO UNKNOWN
+lnx@lnx-ThinkPad-X230:/usr/lib/x86_64-linux-gnu$ ls -l | grep libdl.so
+lrwxrwxrwx  1 root root        32 Jun 16 22:58 libdl.so -> /lib/x86_64-linux-gnu/libdl.so.2
+
+lnx@lnx-ThinkPad-X230:/lib/x86_64-linux-gnu$ ls -l | grep libdl
+-rw-r--r-- 1 root root   14608 Jun 16 22:57 libdl-2.23.so
+lrwxrwxrwx 1 root root      13 Jun 16 22:57 libdl.so.2 -> libdl-2.23.s
+
+#4)try with: -L/usr/lib64 -ldl
+#no /usr/lib64 existing! - only /lib/x86_64-linux-gnu/libc-2.23
+#TRY:
+LDFLAGS   =  $(FCFLAGS_OMP) -Wl,-warn-once -ldl -lrt -L/lib/x86_64-linux-gnu/ -ldl
+
+echo $LD_LIBRARY_PATH gives:
+
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/netcdf-fortran-4.4.4-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/netcdf-4.4.1-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/hdf5-1.8.17-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/szip-2.1-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/zlib-1.2.8-LXgfortran-NOMPI/lib:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/LIB/netcdf4/curl-7.50.1-LXgfortran-NOMPI/lib:
+
+On 2017-10-03 08:41, FAROUX Stéphanie wrote:
+> /usr/lib/x86_64-linux-gnu/libdl.so really exists?
+>
+/usr/lib/x86_64-linux-gnu/libdl.so is a link that points to
+/lib/x86_64-linux-gnu/libdl.so.2   which is a link that points to
+/lib/x86_64-linux-gnu/libdl-2.23.so
+
+libdl.a is here:
+/usr/lib/x86_64-linux-gnu/libdl.a

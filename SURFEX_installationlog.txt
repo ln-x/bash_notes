@@ -1,0 +1,23 @@
+
+#export PATH=$PATH:/usr/lib64/openmpi/bin  #bei lnx installiert auf: /usr/lib/openmpi/ jedoch kein bin?
+
+cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/
+make clean;
+unset XYZ;unset SRC_SURFEX;export VER_MPI="NOMPI";
+export VER_USER=FORC;./configure
+#wenn mit VER_USER -> mit FORC, sonst ohne
+ . ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-FORC-NOMPI-OMP-O2-X0
+
+make
+make user
+make installmaster
+make installuser
+
+cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/MY_RUN/FORCING
+./prepare_forcing.bash hapex
+:wq!
+cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816_2/MY_RUN/KTEST/hapex
+export OMP_NUM_THREADS=1
+./pgd.exe ./prep.exe ./offline.exe
+
+xmgrace TG1.TXT
