@@ -7,3 +7,17 @@ git remote add origin https://github.com/wasserblum/bash_installationnotes
 
 #Alternative:
 #git clone https://github.com/wasserblum/bash_installationnotes
+
+
+#2nd TRY:
+
+#Zuerst Respository of github erstellen und link copieren:
+#In gewünschten Folder navigieren
+git clone https://github.com/wasserblum/bash_notes.git
+ls -ld bash_notes
+cd bash_notes
+git status
+git add test.txt
+git commit -m testmessage
+git push
+git status
