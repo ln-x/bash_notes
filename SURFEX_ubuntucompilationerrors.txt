@@ -197,3 +197,9 @@ On 2017-10-03 08:41, FAROUX Stéphanie wrote:
 
 libdl.a is here:
 /usr/lib/x86_64-linux-gnu/libdl.a
+
+export LD_LIBRARY_PATH=usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}
+
+#routine ldsym was compiled in the ld library?
+#add -ldl at the link edition (command where you crash)
+#The FLAGS for the link edition are in LDFLAGS. 

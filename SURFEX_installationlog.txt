@@ -3,8 +3,10 @@
 
 cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK4816/trunk/src/
 make clean;
-unset XYZ;unset SRC_SURFEX;export VER_MPI="NOMPI";
-export VER_USER=FORC;./configure
+unset XYZ;unset SRC_SURFEX;
+export VER_MPI="NOMPI"; export VER_USER=FORC;
+export LD_LIBRARY_PATH=usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}
+./configure
 #wenn mit VER_USER -> mit FORC, sonst ohne
  . ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-FORC-NOMPI-OMP-O2-X0
 

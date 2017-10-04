@@ -1,0 +1,8 @@
+#work with environments:
+#enter anaconda prompt
+
+conda create --name gdalenv python=2.7 geoenv
+conda install -n geoenv pyproj
+activate geoenv
+
+#stored at: C:\Users\Standard\Anaconda3\env\geoenv\
