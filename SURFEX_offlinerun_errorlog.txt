@@ -1,0 +1,45 @@
+
+ERRORLOG:
+
+
+change namelist option to account for atmospheric file
+ncdump: symbol lookup error: ncdump: undefined symbol: nc__testurl
+SOLVED (ncdump does not work on symbolic links)
+
+***
+ READ_SURF_ATM_DATE: DATE NOT SET
+ -------------------------------------------------------------------------------
+ MORE DETAILS ABOUT THE CRASH IN THE OUTPUT LISTING FILE: LISTING_PREP.txt
+ -------------------------------------------------------------------------------
+ aborted with text:READ_SURF_ATM_DATE: DATE NOT SET|
+***
+DIAGNOSTICS DESACTIVATED
+SURF_ATM DIAGNOSTICS DESACTIVATED
+DIAGNOSTICS DESACTIVATED
+DIAGNOSTICS DESACTIVATED
+ISBA DIAGNOSTICS DESACTIVATED
+read version            8
+DIAGNOSTICS DESACTIVATED
+TEB  DIAGNOSTICS DESACTIVATED
+GRIDTYPE "          " NOT ACCEPTED AS INPUT FILE FOR FIELD PREPARATION
+
+***
+---------------------------------------------------------------------------
+--------------------   FATAL ERROR in SURFEX  -----------------------------
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+-                                                                         -
+READ_SURF_NC: ERROR WHEN READING DIM_FULL
+-                                                                         -
+---------------------------------------------------------------------------
+
+***
+./pgd
+
+At line 147 of file
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
+dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/spll_read_nam_grid_conf_proj.f90
+(unit = 11, file = 'OPTIONS.nam')
+Fortran runtime error: Cannot match namelist object name .
+
+./prep
