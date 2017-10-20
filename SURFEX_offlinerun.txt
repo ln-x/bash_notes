@@ -1,10 +1,32 @@
-installed programmes (apt install)
+***
+##1)PGD step - all geogrid data have to be present.
+landuse: &NAM_FRAC, &NAM_COVER
+topography: &NAM_ZS
+soil: &NAM_ISBA
+projection:&NAM_PGD_GRID, &NAM_CONF_PROJ_GRID, &NAM_CONF_PROJ
+./pgd.exe
+
+##2)PREP step
+&NAM_PREP_SURF_ATM, &NAM_PREP_WATFLUX, &NAM_PREP_TEB, &NAM_PREP_ISBA are read?
+./prep.exe
+
+##3)OFFLINE step -
+FORCING.nc needs to be in run directory
+&NAM_DATA_TEB, &NAM_DATA_ISBA  is read?
+./offline.exe
+
+
+
+***
+##installed programmes: (apt install)
 xmgrace
 ncview
 gedit
 gvim
 netcdf-bin (includes ncdump)
 
+***
+##useful commands
 ln -s ../sourcefile file
 ls -ltr
 ll                               #show file size
@@ -12,49 +34,4 @@ ncdump -c (show coordinates)
 ncdump -h (show header)
 xmgrace TG1.TXT
 
-1)PGD step
-
-./pgd.exe
-
-2)PREP step
-
-
-
-./prep.exe
-
-
-
-
-ERRORLOG:
-
-
-change namelist option to account for atmospheric file
-ncdump: symbol lookup error: ncdump: undefined symbol: nc__testurl
-SOLVED
-
-***
- READ_SURF_ATM_DATE: DATE NOT SET
- -------------------------------------------------------------------------------
- MORE DETAILS ABOUT THE CRASH IN THE OUTPUT LISTING FILE: LISTING_PREP.txt
- -------------------------------------------------------------------------------
- aborted with text:READ_SURF_ATM_DATE: DATE NOT SET|
-***
-DIAGNOSTICS DESACTIVATED
-SURF_ATM DIAGNOSTICS DESACTIVATED
-DIAGNOSTICS DESACTIVATED
-DIAGNOSTICS DESACTIVATED
-ISBA DIAGNOSTICS DESACTIVATED
-read version            8
-DIAGNOSTICS DESACTIVATED
-TEB  DIAGNOSTICS DESACTIVATED
-GRIDTYPE "          " NOT ACCEPTED AS INPUT FILE FOR FIELD PREPARATION
-
-***
----------------------------------------------------------------------------
---------------------   FATAL ERROR in SURFEX  -----------------------------
----------------------------------------------------------------------------
----------------------------------------------------------------------------
--                                                                         -
-READ_SURF_NC: ERROR WHEN READING DIM_FULL
--                                                                         -
----------------------------------------------------------------------------
+grep searchpattern *    #search within all files in current folder for this pattern

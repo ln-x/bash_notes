@@ -35,11 +35,92 @@ READ_SURF_NC: ERROR WHEN READING DIM_FULL
 
 ***
 ./pgd
-
 At line 147 of file
 /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
-dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/spll_read_nam_grid_conf_proj.f90
-(unit = 11, file = 'OPTIONS.nam')
+dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/spll_read_nam_grid_conf_proj.f90 (unit = 11, file = 'OPTIONS.nam')
 Fortran runtime error: Cannot match namelist object name .
-
+SOLVED (overfluous point at the end of coordinate)
+***
+include &NAM_DATA_TEB:
+At line 453 of file /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
+dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/MASTER/spll_pgd_teb_par.f90 (unit = 11, file = 'OPTIONS.nam')
+Fortran runtime error: Cannot match namelist object name nroof_layer
+SOLVED (old parameter name used for nroof layer)
+***
 ./prep
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7FDE4F3F3E08
+#1  0x7FDE4F3F2F90
+#2  0x7FDE4E4A64AF
+#3  0x7FDE4F0F0DCC
+#4  0x6A3878 in init_teb_greenroof_pgd_n_ at spll_init_teb_greenroof_pgd_n.f90:338 (discriminator 2)
+#5  0x4E4ECB in init_teb_n_ at spll_init_teb_n.f90:473
+#6  0x41FB43 in init_town_n_ at spll_init_town_n.f90:153
+#7  0x41E533 in init_surf_atm_n_ at spll_init_surf_atm_n.f90:622
+#8  0x41AFA3 in init_pgd_surf_atm_ at spll_init_pgd_surf_atm.f90:103
+#9  0x4106F2 in MAIN__ at spll_prep.f90:241
+Floating point exception (core dumped)
+
+init_teb_greenroof_pgd_n_ at spll_init_teb_greenroof_pgd_n.f90:338:
+/ (-1*K%XBCOEF(:,JL)))+LOG(K%XWSAT(:,JL)))
+SOLVED (&NAM_PREP_TEB_GREENROOF was missing)
+***
+Program received signal SIGFPE: Floating-point exception - erroneous arithmetic operation.
+
+Backtrace for this error:
+#0  0x7F665C1D0E08
+#1  0x7F665C1CFF90
+#2  0x7F665B4C24AF
+#3  0xA6B7E2 in soilstress_ at spll_soilstress.f90:164 (discriminator 2)
+#4  0x9CD273 in isba_ at spll_isba.f90:476
+#5  0x999340 in greenroof_ at spll_greenroof.f90:285 (discriminator 28)
+#6  0x862B3B in teb_garden2.4521 at spll_teb_garden.f90:736
+#7  0x85F509 in teb_garden_ at spll_teb_garden.f90:615
+#8  0x6F5227 in coupling_teb_n_ at spll_coupling_teb_n.f90:703
+#9  0x4F2172 in coupling_teb_orography_n_ at spll_coupling_teb_orography_n.f90:222
+#10  0x42193B in coupling_town_n_ at spll_coupling_town_n.f90:175
+#11  0x41E49E in treat_surf.5574 at spll_coupling_surf_atm_n.f90:617
+#12  0x41F590 in coupling_surf_atm_n_ at spll_coupling_surf_atm_n.f90:346
+#13  0x4135B2 in MAIN__ at spll_offline.f90:830
+Floating point exception (core dumped)
+
+PF2WGHT(:,1) = (PEK%XWG(:,1)-KK%XWWILT(:,1))/(KK%XWFC(:,1)-KK%XWWILT(:,1))
+SOLVED - valid TEB options in OPTIONS.nam
+****
+COMPILING NEW CODE:
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/LNX/spll_urban_solar_abs.f90:491:48:
+
+ ZAALB_WL(:) =  B%XGR(:) * B%XALB_WIN(:) + B%XWPV(:) * T%XALB_PANEL(:) + (1.-B%XGR(:) - B%XWPV(:)) * T%XALB_WALL(:)
+                                                1
+Error: ‘xwpv’ at (1) is not a member of the ‘bem_t’ structure
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/LNX/spll_urban_solar_abs.f90:806:42:
+
+   ZABS_SW_WPV (JJ)      = (1.-T%XALB_PANEL (JJ))                                  &
+                                          1
+Error: ‘xalb_panel’ at (1) is not a member of the ‘teb_t’ structure
+/home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/dir_obj-LXgfortran-SFX-V8-1-1-NOMPI-OMP-O2-X0/LNX/spll_urban_solar_abs.f90:821:82:
+
+                        ZABS_SW_WL,ZABS_SW_GD, ZABS_SW_GRF, ZABS_SW_WIN,ZABS_SW_WPV    &
+                                                                                  1
+Error: Unexpected junk in formal argument list at (1)
+/h
+
+****
+NOTES:
+ongoing research/NEWS:
+CORDEX downscaling
+urban mapping to prepare for TEB (mapuce)
+planned: 60 stations in Toulouse
+coupling of AROME/MOLARD??/SURFEX inline is planned in recent project proposal
+coupling of SURFEX and MEGAN ongoing at MeteFrance
+stephanie.faroux@meteo.fr
+aaron.boone@meteo.fr -> FORTRAN specific questions
+delphine -> LAI / ISBA
+carol -> LAI / SPOT
+irene - Albedo/Forest + Modis 
+HIRLAM + ALADIN = HARMOMIE Consortium -> Surfex users
+
+WRF will lose 80%of its founding -> USA moves to british forecasting model (better suited for forecasts).
+WRF will probably be no longer supported!
