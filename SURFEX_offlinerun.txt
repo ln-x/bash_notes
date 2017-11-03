@@ -4,6 +4,7 @@ landuse: &NAM_FRAC, &NAM_COVER
 topography: &NAM_ZS
 soil: &NAM_ISBA
 projection:&NAM_PGD_GRID, &NAM_CONF_PROJ_GRID, &NAM_CONF_PROJ
+&NAM_DATA_TEB, &NAM_DATA_ISBA  is read!
 ./pgd.exe
 
 ##2)PREP step
@@ -12,10 +13,35 @@ projection:&NAM_PGD_GRID, &NAM_CONF_PROJ_GRID, &NAM_CONF_PROJ
 
 ##3)OFFLINE step -
 FORCING.nc needs to be in run directory
-&NAM_DATA_TEB, &NAM_DATA_ISBA  is read?
+
 ./offline.exe
 
+***
+#COMPILE USER VERION:
+cd MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
+export XYZ=""
+mkdir LNX
+export VER_USER=LNX
+./configure
+export SRC_SURFEX=""
+. ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-LNX-NOMPI-OMP-O2-X0
+make user
 
+#MAKE CHANGES IN CODE AND RECOMPILE
+cd ../MY_RUN/KTEST/LNX
+#make changes
+cd ../../../src
+make user
+
+#OPENING A NEW TERMINAL:
+cd MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
+? export LD_LIBRARY_PATH=usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}
+? export XYZ=""
+? export VER_USER=LNX
+? ./configure
+? export SRC_SURFEX=""
+. ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-LNX-NOMPI-OMP-O2-X0
+make user
 
 ***
 ##installed programmes: (apt install)
@@ -24,6 +50,7 @@ ncview
 gedit
 gvim
 netcdf-bin (includes ncdump)
+nco (includes ncdiff, nrcat)
 
 ***
 ##useful commands
@@ -33,5 +60,7 @@ ll                               #show file size
 ncdump -c (show coordinates)
 ncdump -h (show header)
 xmgrace TG1.TXT
+ncdiff input1.nc input2.nc output.nc
+ncrcat -d Time,0,231 –v  RAINNC  wrfout* RAINNC.nc
 
 grep searchpattern *    #search within all files in current folder for this pattern
