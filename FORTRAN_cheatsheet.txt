@@ -1,0 +1,5 @@
+print *,(PTA)   !variable
+print *, 'PTA'  !comment
+
+OPEN(UNIT=2, FILE='filename', STATUS = 'NEW')
+CLOSE(UNIT=2)

@@ -31,17 +31,12 @@ make user
 cd ../MY_RUN/KTEST/LNX
 #make changes
 cd ../../../src
-make user
+make u
 
 #OPENING A NEW TERMINAL:
 cd MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
-? export LD_LIBRARY_PATH=usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}
-? export XYZ=""
-? export VER_USER=LNX
-? ./configure
-? export SRC_SURFEX=""
+export LD_LIBRARY_PATH=usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}
 . ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-LNX-NOMPI-OMP-O2-X0
-make user
 
 ***
 ##installed programmes: (apt install)
@@ -64,3 +59,5 @@ ncdiff input1.nc input2.nc output.nc
 ncrcat -d Time,0,231 –v  RAINNC  wrfout* RAINNC.nc
 
 grep searchpattern *    #search within all files in current folder for this pattern
+
+ncrename -v CO2,CO2air Forcing.nc
