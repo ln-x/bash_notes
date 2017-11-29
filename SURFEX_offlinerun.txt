@@ -60,4 +60,8 @@ ncrcat -d Time,0,231 –v  RAINNC  wrfout* RAINNC.nc
 
 grep searchpattern *    #search within all files in current folder for this pattern
 
-ncrename -v CO2,CO2air Forcing.nc
+ncrename -v CO2,CO2air Forcing.nc     #rename single variable
+ncks -d xx,86 -d yy,66 SURF.nc -O SURF_WienInnereSt.nc   #extract values for a single coordinate
+ncks -d lon,16 -d lat,48 in.nc -O out.nc                 #1° -> 111.325 km
+
+ncdump SURF_ATM_DIAGNOSTICS.nc>SURF_DIA.txt   #export nc data into text file

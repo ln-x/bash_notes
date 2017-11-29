@@ -1,0 +1,15 @@
+ipython --pylab
+import pandas as pd
+df = pd.read_csv('file.csv', sep=",", parse_dates=['s_Date'])
+df1 = df.set_index('s_date')
+df1.index = pd.to_datetime(df1.index, format=%d%.%m.%Y %H:%M')
+df_hour = df1.resample('H',how='mean')
+df_hour.head()
+df_hour.to_csv('df_hoursly.csv')
+
+df.dtypes
+df.convert_objects(convert_numeric='force')
+df = df.astype(float)
+
+dt = np.arange('2012-02-11 17:20',2013-03-01 10:10',
+dtype=datetime64[10m]'')
