@@ -1,0 +1,20 @@
+INTEGRATE LCZ in CORINE
+
+1) Processing Toolbox > Grass GIS > Raster > r.reclass: create file reclass LCZ to USGS, Corine to USGS
+    1 thru 11 = 1
+    12 thru 14 = 2
+    ...
+2) Processing Toolbox > Saga > Grid Tools > Mosaic Raster Layer > First/Last/Max...
+
+#OPTB:2) Raster > Raster Calculator: DID NOT WORK
+# a) make mask with LCZ: clipped = (LCZ@1 > 0) * Corine@1
+# b) exchange: Corine - clipped + LCZ
+
+CREATE ASCLLV FOR SURFEX:
+1) Raster>Projections>Warp(Reproject)> EPSG4326
+2) Processing Toolbox>GDAL/OGR>GDALConversions>gdal2xyz
+3) open in Excel > change from LONLAT to LATLON! > save as > tab separated *.txt
+
+CHANGE RASTER RESOLUTION
+OPT_A) Raster Calculator > Current layer extent > set col/row
+OPT_B) Raster > Projections > Warp (gdal_warp): include -tr xres yres

@@ -31,12 +31,17 @@ make user
 cd ../MY_RUN/KTEST/LNX
 #make changes
 cd ../../../src
-make u
+make user
 
 #OPENING A NEW TERMINAL:
 cd MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
 export LD_LIBRARY_PATH=usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}
 . ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-LNX-NOMPI-OMP-O2-X0
+ODER
+. ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-FORC-NOMPI-OMP-O2-X0
+
+cd ../MY_RUN/KTEST/hapex/
+
 
 ***
 ##installed programmes: (apt install)
@@ -46,6 +51,8 @@ gedit
 gvim
 netcdf-bin (includes ncdump)
 nco (includes ncdiff, nrcat)
+diff -> shows difference between ascii files in command line
+meld -> shows difference between ascii files in new split window
 
 ***
 ##useful commands
