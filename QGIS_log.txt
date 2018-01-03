@@ -1,11 +1,8 @@
 INTEGRATE LCZ in CORINE
-
 1) Processing Toolbox > Grass GIS > Raster > r.reclass: create file reclass LCZ to USGS, Corine to USGS
     1 thru 11 = 1
     12 thru 14 = 2
-    ...
 2) Processing Toolbox > Saga > Grid Tools > Mosaic Raster Layer > First/Last/Max...
-
 #OPTB:2) Raster > Raster Calculator: DID NOT WORK
 # a) make mask with LCZ: clipped = (LCZ@1 > 0) * Corine@1
 # b) exchange: Corine - clipped + LCZ
@@ -17,4 +14,29 @@ CREATE ASCLLV FOR SURFEX:
 
 CHANGE RASTER RESOLUTION
 OPT_A) Raster Calculator > Current layer extent > set col/row
-OPT_B) Raster > Projections > Warp (gdal_warp): include -tr xres yres
+OPT_B) Raster > Projections > Warp (gdal_warp): include -tr xres yres #333m/EPSG4326 URBANIA: 0.00328
+
+RASTER CALCULATION
+Processing Toolbox> GDAL/OGR> Miscallaneous>Raster Calculator:
+gdal_calc.py -A input1.tif -B input2.tif --outfile=result.tif --calc="A+B"
+
+SET NODATAVALUE
+Raster>Conversions>Translate > CHECK:No data, FILLIN: 0
+
+******
+WORKFLOWS
+******
+*COMBINE Corine/UrbanAltas/WienData (BUILT,GARDEN,BH,Z0,WALL0):
+0)reclassify UrbanAtlas+Corine
+1)WienData: nodata=0 (EPSG4326)
+2)mosaik UrbanAtlas + Corine (EPSG3035) (4byte/NearestNeighbor/blenddistance10/match=none/fit=nodes)
+3)Reproject 2) to EPSG4326
+4)BUILT,GARDEN,Z0,WALL0 /100
+5)mosaik WienData and 4)
+6)warp to 333.333m: gdal_warp -tr 0.00328
+7)raster>clipper> 15.97,16.778,48.03,48.4478
+8)gdal2xyz
+9)txt
+*PRODUCE FRACTIONS for &NAM_FRAC
+!1)UrbanAtlas_Code>reclassify to FRAC_WATER (50m) (50000)
+2)UrbanAtlas_Code>reclassify to FRAC_TOWN  (50m) (11100 - 14200)
