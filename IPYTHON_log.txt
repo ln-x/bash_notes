@@ -13,3 +13,6 @@ df = df.astype(float)
 
 dt = np.arange('2012-02-11 17:20',2013-03-01 10:10',
 dtype=datetime64[10m]'')
+
+#FOR NETCDF
+xarray.pydata.org 

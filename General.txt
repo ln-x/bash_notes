@@ -1,0 +1,12 @@
+#Extract pdf page(s):
+$ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
+     -dFirstPage=22 -dLastPage=36 \
+     -sOutputFile=outfile_p22-p36.pdf 100p-inputfile.pdf
+
+
+#LATEX
+apt-get install texlive
+vim test.tex ...
+latex test.tex
+xdvi test.dvi
+pdflatex test.tex
