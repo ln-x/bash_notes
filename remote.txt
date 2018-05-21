@@ -1,0 +1,29 @@
+ftp://ftp.boku.ac.at pvopt
+
+sudo openconnect 141.244.203.252
+group: BOKUnet
+user: htrimmel
+PW: novell(borgesshort)
+
+scp (laufendes vpn verbindung, kein ssh tunnel):
+copy to remote:
+scp /home/lnx/test.txt heidi@141...:/home/heidi #copy file
+scp -r  ...                                     #copy folder
+
+copy from remote to local:
+scp heidi@141...:/home/heidi/test.txt /home/lnx
+
+ssh 141.244.248.120 -l heidi       #impj philipps pw
+ssh nona01.boku.ac.at -l htrimmel  #novell(borgesshort)
+ssh imp9.boku.ac.at -l heidit      #novell(borgesshort)
+ssh imp7.boku.ac.at -l heidit      #ist gesund
+
+passwd  #change password
+chsh -s /bin/bash   #change shell (from default tcshell auf imp7)
+
+##copy all *nc from directory, except one file
+mv ~/test1/*txt ~/TEST  #only move files of certain pattern
+mv ~/test1/!(nope.txt) ~/TEST #move all but one specific file
+scp htrimmel@nona01:~/open_SURFEX_V8_1/MY_RUN/KTEST/\{SURF_ATM_DIAGNOSTICS.OUT.nc,SURF_ATM.OUT.nc,PREP.nc,PGD.nc,TEB_CANOPY.OUT.nc,TEB_PROGNOSTIC.OUT.nc,TEB_DIAGNOSTICS.OUT.nc,TEB_DIAG_CUMUL.OUT.nc\} /media/lnx/98C4EEA4C4EE83BA/TEST
+
+exit: strg+d

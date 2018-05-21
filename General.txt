@@ -9,4 +9,23 @@ apt-get install texlive
 vim test.tex ...
 latex test.tex
 xdvi test.dvi
+
+latex test.tex
+bibtex test
 pdflatex test.tex
+
+rsync -auvr test2/* test1
+rsync -auv /home/lnx/* /media/lnx/atlantique/ubuntu1604/home/lnx
+#-a: recursive, copy symlinks as symlinks, preserve permission, modifyingtimes, groups, owner, devices, special files
+-n: dry run without copying
+-q: quiet - only error messages
+-u: update files
+
+#SEC
+iptables -> firewall
+ufw
+shorewall -> firewall
+
+luks
+ppm
+secureboot

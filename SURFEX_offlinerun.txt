@@ -43,39 +43,3 @@ ODER
 cd ../MY_RUN/KTEST/hapex/
 ODER
 cd ../MY_RUN/KTEST/lnx/
-
-***
-##installed programmes: (apt install)
-xmgrace
-ncview
-gedit
-gvim
-netcdf-bin (includes ncdump)
-nco (includes ncdiff, nrcat)
-diff -> shows difference between ascii files in command line
-meld -> shows difference between ascii files in new split window (GUI)
-
-***
-##useful commands
-ln -s ../sourcefile file
-ls -ltr
-ll                               #show file size
-ncdump -c (show coordinates)
-ncdump -h (show header)
-xmgrace TG1.TXT
-ncdiff input1.nc input2.nc output.nc #show differences
-ncrcat -d Time,0,231 –v  RAINNC  wrfout* RAINNC.nc
-
-grep searchpattern *    #search within all files in current folder for this pattern
-
-ncrename -v CO2,CO2air Forcing.nc     #rename single variable
-ncks -d xx,86 -d yy,66 SURF.nc -O SURF_WienInnereSt.nc   #extract values for a single coordinate
-ncks -d lon,16 -d lat,48 in.nc -O out.nc                 #1° -> 111.325 km
-
-ncdump SURF_ATM_DIAGNOSTICS.nc>SURF_DIA.txt   #export nc data into text file
-
-ncks --mk_rc_dm time infile.nc outfile.nc   #add record dimension
-ncrcat infile1.nc infile2.nc outfile.nc     #concatenate two *.nc files
-ncks --fix_rec_dm time infile.nc outfile.nc #remove record dimension
-
-tail -n 20 LISTING_OFFLINE0.txt
