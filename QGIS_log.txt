@@ -8,8 +8,9 @@ INTEGRATE LCZ in CORINE
 # b) exchange: Corine - clipped + LCZ
 
 CREATE ASCLLV FOR SURFEX:
-1) Raster>Projections>Warp(Reproject)> EPSG4326
-2) Processing Toolbox>GDAL/OGR>GDALConversions>gdal2xyz
+
+1) Raster>Projections > Warp(Reproject) > EPSG4326
+2) Processing Toolbox > GDAL/OGR>GDALConversions > gdal2xyz
 3) open in Excel > change from LONLAT to LATLON! > save as > tab separated *.txt
 
 CHANGE RASTER RESOLUTION
@@ -17,11 +18,11 @@ OPT_A) Raster Calculator > Current layer extent > set col/row
 OPT_B) Raster > Projections > Warp (gdal_warp): include -tr xres yres #333m/EPSG4326 URBANIA: 0.00328
 
 RASTER CALCULATION
-Processing Toolbox> GDAL/OGR> Miscallaneous>Raster Calculator:
+Processing Toolbox > GDAL/OGR > Miscallaneous > Raster Calculator:
 gdal_calc.py -A input1.tif -B input2.tif --outfile=result.tif --calc="A+B"
 
 SET NODATAVALUE
-Raster>Conversions>Translate > CHECK:No data, FILLIN: 0
+Raster > Conversions > Translate > CHECK: No data, FILLIN: 0
 
 ******
 WORKFLOWS
@@ -34,7 +35,7 @@ WORKFLOWS
 4)BUILT,GARDEN,Z0,WALL0 /100
 5)mosaik WienData and 4)   SAGA>Mosaic Raster Layers>
 6)warp to 333.333m: gdal_warp -tr 0.00328
-7)raster>clipper> 15.97,16.778,48.03,48.4478
+7)raster > clipper > 15.97,16.778,48.03,48.4478
 8)gdal2xyz
 9)txt
 
@@ -48,29 +49,45 @@ Corine_LCZ_epsg3045_reclass_SRp
 @1=1 OR @1>24                 -> FRAC TOWN
 @1>1 AND @1 != 16 AND @1 < 25 -> FRAC NATURE
 
-3)Raster>Projections>Warp to 333.333m: gdal_warp -tr 0.00328 0.00328 + Reproject to EPSG4326,
-5)Raster>Extraction>clipper> 15.97,16.778,48.03,48.4478
-6)Gdal>Conversion>gdal2xyz
+Reproject to EPSG4326
+3) Raster > Projections > Warp to 333.333m: gdal_warp -tr 0.00298421 0.00299760
+5) Raster > Extraction > clipper> 15.97,16.778,48.03,48.4478  // or: 15.96914, 16.77487, 48.03471, 48.44838,
+6) Gdal > Conversion > gdal2xyz
 7) open in Excel > change from LONLAT to LATLON! > save as > tab separated *.txt
 
-
+***
+FUTURE SCENARIOS
+***
 
 *PREPARE PGO SZENARIES FROM PDF
 1) GIMP-> clean-> tif
 2) QGIS-> Georeference
 3) QGIS-> Vectorize
-4) QGIS-> Vectors>Geometry tools> Export/Add geometry columns
-5) QGIS->layer properties > general> Query builder (button at the bottom):
+4) QGIS-> Vector > Geometry tools > Export/Add geometry columns
+5) QGIS-> layer properties (right click on layer in layer panel)
+        > general> Query builder (button at the bottom):
         "area" > 40 000 (180x180 square pixels)
-               > 280 000 ???
-    ->   ok
-    ->   right click queried layer> save as
-    ->    edit > mark additional erroreous polygons+delete
+               > 280 000
+    -> ok
+    -> right click queried layer> save as
+    -> edit > mark additional erroreous polygons + delete
 
-6) vector> research tools> random points inside polygons (fixed)
-   1
-7) vector > geometry tools > delaunay triang > v.voronoi
-8) random selection of polygons
+6) Vector > research tools> random points inside polygons (fixed)
+7) Vector > geometry tools > delaunay triang > v.voronoi
+7A) Vector > geoprocessing tools > clip
+8) random selection of polygons > save as (all selected)
 
-A-> high density total area=?
-B-> low density  total area=?
+9) Raster > Conversions > Rasterize > units 333.333m (for units=m), -at (all touched) if area should be larger than vector area
+10) total area=?  grass: r.report > c > pixels are counted
+
+*PRODUCE FRACTIONS FOR FUTURE SCENARIOS:
+1) see "Prepare PGO Scenarios from pdf" 1-8
+2) save *.shp as > change CRS to EPSG4326
+3) raster > conversions > rasterize mit 0.00298421 0.00299760
+4) Raster > Extraction > clipper> 15.97,16.778,48.03,48.4478
+5) check number of rows and columns, visual check
+6) gdal xyz to csv
+7) open in spreadsheet
+8) change lat/lon
+9) calculate nature fraction
+10) save as *.txt

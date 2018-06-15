@@ -20,12 +20,39 @@ rsync -auv /home/lnx/* /media/lnx/atlantique/ubuntu1604/home/lnx
 -n: dry run without copying
 -q: quiet - only error messages
 -u: update files
+2>rsync.err: write output/error messages to files
 
 #SEC
 iptables -> firewall
 ufw
 shorewall -> firewall
 
-luks
-ppm
-secureboot
+wireshark (incl. gui)
+tcpdump
+nrap
+
+luks -not installed
+ppm -portable pixmap file format?
+secureboot -notinstalled
+
+
+EFAIL:
+ "BACKCHANNELS"
+-> man in the middle attack (email wird abgefangen und weitergeleitet, hacker kontrolliert server)
+-> bei multi-part email messages, wenn nur mittelteil verschlüsselt und link enthält.
+-> wenn externe links geöffnet werden wird Nachricht rückgängig entschlüsselt
+-> dont load remote content
+
+CRYPTO GADGETS:
+CBC mode  - blocks can be recognized as patterns
+CFB mode  - feedback to disguise patterns
+
+S/MIME -> known plaintext at the beginning (header, signature), no integrity protection
+-> plaintext + encrypted text is known -> key  (XOR)
+
+PGP -> integrity protection since 2000, signatures get validated, compression makes attack more complicated
+-> attack is noticed
+-> WATCH SIGNATURE!
+-> no inline/PGP only PGP/MIME
+
+ENIGMAIL/THUNDERBIRD <2.0.5 vulnerable!

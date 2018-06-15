@@ -1,4 +1,24 @@
-grass_notes
+grass_notes - valuable grass tools
 
 
 r.in.bin input=/tmp/ECOCLIMAP_I_GLOBAL.bin bytes=1 anull=0 output=test rows=21600 cols=43200 north=90 south=-90 east=180 west=-180
+
+1)Create LOCATION
+
+2)IMPORT: r.import, r.in.gdal
+
+3)CONVERSION: v.to.rast
+
+4)CALC: r.map.calc
+
+5)MANIP: r.clip, d.rast.edit (better:Qgisplugin Serval),
+r.null map=test setnull=0  #set 0 to nodata
+r.null map=test null=0     #set nodata to 0
+r.buffer
+r.random
+
+6)INFO: 
+r.info map=test3,
+r.info -h map=test3 #history-how it was calculated
+r.category #which categories exist
+r.stats #counts pixels
