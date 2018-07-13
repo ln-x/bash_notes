@@ -1,3 +1,49 @@
+#LINUX BASICS
+eog (view png)
+alias banana="echo banana" #best put tehm in bash_aliases or bashrc
+diff
+vimdiff
+touch
+ls -lah
+pwd
+##CPU
+less /proc/cpuinfo
+lscpu
+##RAM
+free -h
+sudo dmidecode --type memory
+##HARDWARE
+lshw
+hardinfo (GUI)
+##Speicher
+lsblk
+sudo smartcrl -a /dev/sda
+sudo gsmartcontrol (GUI)
+df -h
+du -h
+du -s -h #see which subfolder/file uses the most space!
+tree
+lsof #list open files
+fdisk
+parted
+gparted
+ps -e a -f
+kill
+xkill
+top
+htop
+service
+shutdown
+ssh
+wall "..."
+pwgen #generates password
+telnet towel.blinkenlights.nl
+dd #data dump e.g. dd if =/dev/zero bs=256 of ~/zeros.dat
+/dev/zero writes binary zeros
+/dev/random writes binary random  #14 times to be completely random
+hexedit #shows binary file
+
+
 #Extract pdf page(s):
 $ gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
      -dFirstPage=22 -dLastPage=36 \

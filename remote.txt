@@ -18,6 +18,23 @@ ssh nona01.boku.ac.at -l htrimmel  #novell(borgesshort)
 ssh imp9.boku.ac.at -l heidit      #novell(borgesshort)
 ssh imp7.boku.ac.at -l heidit      #ist gesund
 
+ssh htrimmel@vsc3.vsc.ac.at
+scp filename htrimmel@vsc3.vsc.ac.at
+
+copy from vsc to local:
+scp -r htrimmel@vsc3.vsc.ac.at:/home/lv71129/htrimmel /home/lnx
+rsync -av
+
+nano, cat, k? #editors
+alias check = squeue - u nadeem
+touch SimStart #create file with simulation start timestamp
+touch SimEnd #create file with simulation end timestamp
+sshv?
+lt?
+commandslukas?
+
+
+
 passwd  #change password
 chsh -s /bin/bash   #change shell (from default tcshell auf imp7)
 
