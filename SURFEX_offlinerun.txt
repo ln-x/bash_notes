@@ -17,7 +17,7 @@ FORCING.nc needs to be in run directory
 ./offline.exe
 
 ***
-#COMPILE USER VERION:
+#COMPILE USER VERSION:
 cd MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
 export XYZ=""
 mkdir LNX
@@ -34,7 +34,7 @@ cd ../../../src
 make user
 
 #OPENING A NEW TERMINAL:
-cd MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
+cd /home/lnx/MODELS/SURFEX/2_source/SURFEX_TRUNK_4818/trunk/src/
 export LD_LIBRARY_PATH=usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}
 . ../conf/profile_surfex-LXgfortran-SFX-V8-1-1-LNX-NOMPI-OMP-O2-X0
 ODER

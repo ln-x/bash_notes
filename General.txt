@@ -1,4 +1,5 @@
 #LINUX BASICS
+tar -xzf archiv.tar.gz
 eog (view png)
 alias banana="echo banana" #best put tehm in bash_aliases or bashrc
 diff
@@ -41,7 +42,11 @@ telnet towel.blinkenlights.nl
 dd #data dump e.g. dd if =/dev/zero bs=256 of ~/zeros.dat
 /dev/zero writes binary zeros
 /dev/random writes binary random  #14 times to be completely random
-hexedit #shows binary file
+
+hexedit #shows binary file + allows edits
+hexdump -C
+xxd -b
+objdump -d /path/to/binary  #shows executable code it in assambler
 
 
 #Extract pdf page(s):
