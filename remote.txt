@@ -33,6 +33,10 @@ sshv?
 lt?
 commandslukas?
 
+squeue #check queuw
+stat   #check permissions
+chmod +x #make executable
+
 
 
 passwd  #change password

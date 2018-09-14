@@ -1,0 +1,20 @@
+greenroof error log
+
+aborted with text:DIF_LAYER: WITH CISBA=DIF ROOTFRAC MUST BE DEFINED|
+
+#include 4-10 rootfrac, 0.5
+change CISBA to DIF
+
+aborted with text:INIT_ISBAN: WITH CISBA = DIF, CSNOW MUST BE 3-L OR CRO|
+
+include roofrac in NAM_DATA_TEB_GREENROOF
+
+Bad namelist object XUNIF_LAI_GR
+-> XUNIF_LAI
+
+Fortran runtime error: Bad data for namelist object xunif_lai_gr
+Fortran runtime error: Bad data for namelist object xunif_sand_gr
+
+when I remove all xunif:
+
+aborted with text:DIF_LAYER: WITH CISBA=DIF ROOTFRAC MUST BE DEFINED|

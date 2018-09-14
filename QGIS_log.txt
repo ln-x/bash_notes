@@ -30,7 +30,7 @@ WORKFLOWS
 *COMBINE Corine/UrbanAltas/WienData (BUILT,GARDEN,BH,Z0,WALL0):
 0)reclassify UrbanAtlas+Corine
 1)WienData: nodata=0 (EPSG4326)
-2)mosaik UrbanAtlas + Corine (EPSG3035) (4byte/NearestNeighbor/blenddistance10/match=none/fit=nodes)
+2)SAGA/mosaik: UrbanAtlas + Corine (EPSG3035) (4byte/NearestNeighbor/blenddistance10/match=none/fit=nodes)
 3)Reproject 2) to EPSG4326
 4)BUILT,GARDEN,Z0,WALL0 /100
 5)mosaik WienData and 4)   SAGA>Mosaic Raster Layers>
